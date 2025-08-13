@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: namegen-team3-app
+  labels:
+    app: namegen-team3
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: namegen-team3
+  template:
+    metadata:
+      labels:
+        app: namegen-team3
+    spec:
+      containers:
+      - name: namegen-team3
+        image: public.ecr.aws/k5u0o7b3/namegen-team3:latest
+        ports:
+        - containerPort: 8080
