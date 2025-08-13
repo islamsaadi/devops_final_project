@@ -19,3 +19,6 @@ spec:
         image: public.ecr.aws/k5u0o7b3/namegen-team3:latest
         ports:
         - containerPort: 8080
+        env:
+        - name: MONGODB_URL
+          value: mongodb://mongo:27017/namegen
