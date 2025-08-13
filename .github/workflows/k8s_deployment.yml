@@ -33,12 +33,12 @@ jobs:
       run: |
         aws eks --region us-west-2 update-kubeconfig --name team3-cluster
         #for data base
-        kubectl apply -f k8s_manifests/storage_svc.yml
-        kubectl apply -f k8s_manifests/db_deployment.yml
-        kubectl apply -f k8s_manifests/db_srvc.yml
+        kubectl apply -f k8s_manifests/storage_svc.yaml
+        kubectl apply -f k8s_manifests/db_deployment.yaml
+        kubectl apply -f k8s_manifests/db_srvc.yaml
         kubectl rollout status statefulset/mongo
         #for app
-        kubectl apply -f k8s_manifests/app_deployment.yml
-        kubectl apply -f k8s_manifests/app_srvc.yml
+        kubectl apply -f k8s_manifests/app_deployment.yaml
+        kubectl apply -f k8s_manifests/app_srvc.yaml
         kubectl rollout status deployment/team3-namegen
         kubectl get svc team3-namegen -o wide
