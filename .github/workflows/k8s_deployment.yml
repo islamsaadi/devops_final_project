@@ -36,9 +36,9 @@ jobs:
         kubectl apply -f k8s_manifests/storage_svc.yaml
         kubectl apply -f k8s_manifests/db_deployment.yaml
         kubectl apply -f k8s_manifests/db_srvc.yaml
-        kubectl rollout status statefulset/mongo
+        kubectl rollout status statefulset/mongo-team3
         #for app
         kubectl apply -f k8s_manifests/app_deployment.yaml
         kubectl apply -f k8s_manifests/app_srvc.yaml
-        kubectl rollout status deployment/namegen-team3
-        kubectl get svc namegen-team3 -o wide
+        kubectl rollout status deployment/namegen-team3-app
+        kubectl get svc namegen-team3-service -o wide
