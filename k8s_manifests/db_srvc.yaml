@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo
+  name: mongo-team3
 spec:
   selector:
-    app: mongo
+    app: mongo-team3
   ports:
     - protocol: TCP
       port: 27017

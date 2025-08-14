@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongo-team3
   labels:
-    app: mongo
+    app: mongo-team3
 spec:
-  serviceName: "mongo"
+  serviceName: "mongo-team3"
   replicas: 1
   selector:
     matchLabels:
-      app: mongo
+      app: mongo-team3
   template:
     metadata:
       labels:
-        app: mongo
+        app: mongo-team3
     spec:
       containers:
-      - name: mongo
+      - name: mongo-team3
         image: mongodb:3.6
         ports:
         - containerPort: 27017
