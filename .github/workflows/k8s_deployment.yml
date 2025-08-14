@@ -25,9 +25,9 @@ jobs:
     - name: Build, tag and push
       run: |
         aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/k5u0o7b3
-        docker build -t team3-namegen .
-        docker tag team3-namegen:latest public.ecr.aws/k5u0o7b3/team3-namegen:latest
-        docker push public.ecr.aws/k5u0o7b3/team3-namegen:latest
+        docker build -t namegen-team3 .
+        docker tag namegen-team3:latest public.ecr.aws/k5u0o7b3/namegen-team3:latest
+        docker push public.ecr.aws/k5u0o7b3/namegen-team3:latest
 
     - name: Deploy to EKS
       run: |
@@ -40,5 +40,5 @@ jobs:
         #for app
         kubectl apply -f k8s_manifests/app_deployment.yaml
         kubectl apply -f k8s_manifests/app_srvc.yaml
-        kubectl rollout status deployment/team3-namegen
-        kubectl get svc team3-namegen -o wide
+        kubectl rollout status deployment/namegen-team3
+        kubectl get svc namegen-team3 -o wide
