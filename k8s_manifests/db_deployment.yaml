@@ -28,7 +28,7 @@ spec:
       name: mongo-persistent-storage
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: team3-namegen-storage
+      storageClassName: team3-storage
       resources:
         requests:
           storage: 5Gi
