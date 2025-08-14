@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mongo-team3
-        image: mongodb:3.6
+        image: mongo:3.6
         ports:
         - containerPort: 27017
         volumeMounts:
