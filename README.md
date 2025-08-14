@@ -201,5 +201,73 @@ kubectl get service namegen-team3-service
 kubectl describe service namegen-team3-service
 ```
 
+## 🧹 Cleanup & Resource Management
+
+### Deleting the EKS Cluster
+
+When you're done with the project and want to clean up all AWS resources to avoid charges:
+
+#### Option 1: Delete using eksctl (Recommended)
+```bash
+# Delete the entire cluster and all associated resources
+eksctl delete cluster --name team3-cluster --region us-west-2
+
+# This will automatically delete:
+# - EKS cluster
+# - Node groups
+# - VPC and subnets (if created by eksctl)
+# - Security groups
+# - Load balancers
+# - EBS volumes
+```
+
+#### Option 2: Delete Kubernetes resources first, then cluster
+```bash
+# Step 1: Delete all deployed applications
+kubectl delete -f k8s_manifests/
+
+# Step 2: Delete any persistent volumes
+kubectl delete pv --all
+
+# Step 3: Delete the cluster
+eksctl delete cluster --name team3-cluster --region us-west-2
+```
+
+#### Option 3: Manual cleanup (if eksctl delete fails)
+```bash
+# Delete cluster from AWS console or CLI
+aws eks delete-cluster --name team3-cluster --region us-west-2
+
+# Clean up node groups
+aws eks delete-nodegroup --cluster-name team3-cluster --nodegroup-name <nodegroup-name> --region us-west-2
+
+# Clean up VPC and other resources if they were created specifically for this cluster
+```
+
+### Verify Cleanup
+```bash
+# Check that cluster is deleted
+eksctl get cluster --region us-west-2
+
+# Check AWS console for any remaining resources:
+# - EC2 instances
+# - Load balancers
+# - EBS volumes
+# - VPC components
+```
+
+### Cost Optimization Tips
+- Delete the cluster when not in use to avoid ongoing charges
+- Monitor AWS billing dashboard for unexpected costs
+- Use `kubectl get pv` to check for orphaned persistent volumes
+- Review CloudFormation stacks for any remaining eksctl resources
+
+## 📝 Additional Notes
+
+### Important Considerations
+- Deleting the cluster will permanently remove all data stored in the MongoDB persistent volumes
+- Make sure to backup any important data before deletion
+- The deletion process may take 10-15 minutes to complete
+- Some AWS resources may have a small delay before being fully cleaned up
 
 *This project demonstrates enterprise-grade DevOps practices including containerization, orchestration, monitoring, and cloud-native deployment strategies.*
